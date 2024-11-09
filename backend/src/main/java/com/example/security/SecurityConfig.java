@@ -16,12 +16,10 @@ public class SecurityConfig {
         http
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .dispatcherTypeMatchers(HttpMethod.valueOf("/login")).permitAll() // Permitir acesso ao endpoint de login
+                                .antMatchers("/login", "/register").permitAll() // Permitir acesso ao endpoint de login e registro
                                 .anyRequest().authenticated() // Qualquer outra requisição precisa estar autenticada
-                );
-
-        // Se você não precisa de proteção CSRF, pode desabilitá-la
-        http.csrf(csrf -> csrf.disable());
+                )
+                .csrf(csrf -> csrf.disable()); // Desabilitar CSRF se não for necessário
 
         return http.build();
     }

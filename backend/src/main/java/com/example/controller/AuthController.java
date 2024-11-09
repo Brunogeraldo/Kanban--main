@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.AuthResponse;
 import com.example.model.AuthRequest; // Certifique-se de que esse modelo existe
+import com.example.model.User; // Certifique-se de que o modelo User existe
 import com.example.repository.UserRepository;
 import com.example.Util.JwtUtil; // Certifique-se de que o import está correto
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AuthRequest user) { // Mudando AuthResponse para User
+    public ResponseEntity<?> register(@RequestBody User user) { // Mudando AuthResponse para User
         if (userRepository.findByUsername(user.getUsername()) != null) {
             return ResponseEntity.badRequest().body("Usuário já existe!");
         }
